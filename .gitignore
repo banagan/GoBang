@@ -19,3 +19,12 @@
 *.exe
 *.out
 *.app
+
+*.suo
+proj.win32/Debug.win32
+proj.win32/Release.win32
+proj.win32/Debug.win32/*
+proj.win32/Release.win32/*
+proj.android/bin/*
+cocos2d
+cocos2d/*
