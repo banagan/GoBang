@@ -111,9 +111,9 @@ void SysMenu::touchEvent(Ref *pSender, TouchEventType type)
 	{
 	case TOUCH_EVENT_BEGAN:
 	{
-		CCLog("aa");
+		// 
+	    
 	}
-		break;
 	default:
 		break;
 	}

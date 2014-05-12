@@ -28,3 +28,5 @@ proj.win32/Release.win32/*
 proj.android/bin/*
 cocos2d
 cocos2d/*
+*.sdf
+*.opensdf
