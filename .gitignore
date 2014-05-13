@@ -30,3 +30,9 @@ cocos2d
 cocos2d/*
 *.sdf
 *.opensdf
+bin/*
+bin
+debug
+debug/*
+assets/*
+obj/*

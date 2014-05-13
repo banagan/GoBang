@@ -16,7 +16,7 @@
       "classname": "CCNode",
       "name": null,
       "canedit": true,
-      "objecttag": 10004,
+      "objecttag": 10013,
       "rotation": 0,
       "scalex": 1,
       "scaley": 1,
@@ -32,7 +32,7 @@
           "name": "GUIComponent",
           "file": null,
           "fileData": {
-            "path": "sysMenuUi_1.ExportJson",
+            "path": "sysMenuUi.ExportJson",
             "plistFile": "",
             "resourceType": 0
           }

@@ -5,7 +5,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "ui\CocosGUI.h"
 
-class SysMenu : public cocos2d::Layer
+class GoBang : public cocos2d::Layer
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -16,10 +16,14 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-	void touchEvent(cocos2d::Ref *pSender, cocos2d::ui::TouchEventType type);
+
+	// touch event
+	void touchEventButtonGame(cocos2d::Ref *pSender, cocos2d::ui::TouchEventType type);
+	void touchEventButtonSetting(cocos2d::Ref *pSender, cocos2d::ui::TouchEventType type);
+	void touchEventButtonAbout(cocos2d::Ref *pSender, cocos2d::ui::TouchEventType type);
     
     // implement the "static create()" method manually
-	CREATE_FUNC(SysMenu);
+	CREATE_FUNC(GoBang);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

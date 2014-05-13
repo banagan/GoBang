@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "SysMenuScene.h"
+#include "GoBang.h"
 
 USING_NS_CC;
 
@@ -22,6 +22,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	glview->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
 
+	// add searchPaths
+	auto fileUtils = FileUtils::getInstance();
+	std::vector<std::string> searchPaths;
+	searchPaths.push_back("sysMenu");
+	searchPaths.push_back("game");
+	fileUtils->setSearchPaths(searchPaths);
+	
     // turn on display FPS
     director->setDisplayStats(true);
 
@@ -29,7 +36,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = SysMenu::createScene();
+	auto scene = GoBang::createScene();
 
     // run
     director->runWithScene(scene);
