@@ -29,8 +29,18 @@ bool GoBang::init()
     {
         return false;
     }
-
-    return true;
+	auto _nodeSysMenu = SceneReader::getInstance()->createNodeWithSceneFile("sysMenuScene.json");
+	this->addChild(_nodeSysMenu);
+	auto render = static_cast<ComRender*>(_nodeSysMenu->getChildByTag(10013)->getComponent("GUIComponent"));
+	auto widget = static_cast<cocos2d::ui::Widget*>(render->getNode());
+	auto btnGame = static_cast<Button*>(widget->getChildByName("btnGame"));
+	btnGame->addTouchEventListener(this,toucheventselector(GoBang::touchEventButtonGame));
+	auto btnSetting = static_cast<Button*>(widget->getChildByName("btnSetting"));
+	btnSetting->addTouchEventListener(this,toucheventselector(GoBang::touchEventButtonSetting));
+	auto btnAbout = static_cast<Button*>(widget->getChildByName("btnAbout"));
+	btnAbout->addTouchEventListener(this,toucheventselector(GoBang::touchEventButtonAbout));
+	
+	return true;
 }
 
 
@@ -51,7 +61,21 @@ void GoBang::menuCloseCallback(Ref* pSender)
 // btnGame touch event
 void GoBang::touchEventButtonGame(Ref *pSender, TouchEventType type)
 {
-
+	auto scene = Scene::create();
+	auto _nodeGame = SceneReader::getInstance()->createNodeWithSceneFile("gameScene.json");
+	auto renderGame = static_cast<ComRender*>(_nodeGame->getChildByTag(10011)->getComponent("GUIComponent"));
+	auto widgetGame = static_cast<cocos2d::ui::Widget*>(renderGame->getNode());
+	auto btnBack = static_cast<Button*>(widgetGame->getChildByName("Button_3"));
+	btnBack->addTouchEventListener(this, toucheventselector(GoBang::touchEventButtonBack));
+	scene->addChild(_nodeGame);
+	switch (type)
+	{
+	case TOUCH_EVENT_ENDED:
+		Director::getInstance()->replaceScene(scene);
+		break;
+	default:
+		break;
+	}
 }
 
 // btnSetting touch event
@@ -64,4 +88,26 @@ void GoBang::touchEventButtonSetting(Ref *pSender, TouchEventType type)
 void GoBang::touchEventButtonAbout(Ref *pSender, TouchEventType type)
 {
 
+}
+void GoBang::touchEventButtonBack(Ref *pSender, TouchEventType type)
+{
+	auto scene = Scene::create();
+	auto _nodeSysMenu = SceneReader::getInstance()->createNodeWithSceneFile("sysMenuScene.json");
+	auto render = static_cast<ComRender*>(_nodeSysMenu->getChildByTag(10013)->getComponent("GUIComponent"));
+	auto widget = static_cast<cocos2d::ui::Widget*>(render->getNode());
+	auto btnGame = static_cast<Button*>(widget->getChildByName("btnGame"));
+	btnGame->addTouchEventListener(this, toucheventselector(GoBang::touchEventButtonGame));
+	scene->addChild(_nodeSysMenu);
+	switch (type)
+	{
+	case TOUCH_EVENT_ENDED:
+		
+		
+		Director::getInstance()->replaceScene(scene);
+
+		break;
+	default:
+		break;
+	}
+		
 }
