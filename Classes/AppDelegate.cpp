@@ -22,13 +22,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	glview->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
 
+	/*
 	// add searchPaths
 	auto fileUtils = FileUtils::getInstance();
 	std::vector<std::string> searchPaths;
 	searchPaths.push_back("sysMenu");
 	searchPaths.push_back("game");
 	fileUtils->setSearchPaths(searchPaths);
-	
+	*/
+
     // turn on display FPS
     director->setDisplayStats(true);
 
