@@ -16,7 +16,7 @@
       "classname": "CCNode",
       "name": null,
       "canedit": true,
-      "objecttag": 10011,
+      "objecttag": 10017,
       "rotation": 0,
       "scalex": 1,
       "scaley": 1,
@@ -32,7 +32,7 @@
           "name": "GUIComponent",
           "file": null,
           "fileData": {
-            "path": "gameUi.ExportJson",
+            "path": "sysMenuUi/sysMenuUi.ExportJson",
             "plistFile": "",
             "resourceType": 0
           }
@@ -51,7 +51,7 @@
       "__type": "ComSceneSurrogate:#EditorCommon.JsonModel.Component",
       "classname": "CCScene",
       "name": "CCScene",
-      "scenename": "gameScene"
+      "scenename": "sysMenuScene"
     },
     {
       "__type": "ComSimpleAudioSurrogate:#EditorCommon.JsonModel.Component",

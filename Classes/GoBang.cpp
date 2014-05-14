@@ -29,45 +29,103 @@ bool GoBang::init()
     {
         return false;
     }
-	auto _nodeSysMenu = SceneReader::getInstance()->createNodeWithSceneFile("sysMenuScene.json");
-	this->addChild(_nodeSysMenu);
-	auto render = static_cast<ComRender*>(_nodeSysMenu->getChildByTag(10013)->getComponent("GUIComponent"));
-	auto widget = static_cast<cocos2d::ui::Widget*>(render->getNode());
-	auto btnGame = static_cast<Button*>(widget->getChildByName("btnGame"));
-	btnGame->addTouchEventListener(this,toucheventselector(GoBang::touchEventButtonGame));
-	auto btnSetting = static_cast<Button*>(widget->getChildByName("btnSetting"));
-	btnSetting->addTouchEventListener(this,toucheventselector(GoBang::touchEventButtonSetting));
-	auto btnAbout = static_cast<Button*>(widget->getChildByName("btnAbout"));
-	btnAbout->addTouchEventListener(this,toucheventselector(GoBang::touchEventButtonAbout));
+	
+	do
+	{
+		Node *root = createSysMenuScene();
+		CC_BREAK_IF(!root);
+		this->addChild(root);
+	} while (0);
 	
 	return true;
 }
 
-
-void GoBang::menuCloseCallback(Ref* pSender)
+cocos2d::Node* GoBang::createSysMenuScene()
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
+	std::string sceneFileName = "sysMenuScene.json";
+	int tag = 10017;
+	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
 
-    Director::getInstance()->end();
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+	auto render = static_cast<ComRender*>(node->getChildByTag(tag) -> getComponent("GUIComponent"));
+	auto widget = static_cast<Widget*>(render->getNode());
+
+	// Button
+	auto btnGame = static_cast<Button*>(widget->getChildByName("btnGame"));
+	auto btnSetting = static_cast<Button*>(widget->getChildByName("btnSetting"));
+	auto btnAbout = static_cast<Button*>(widget->getChildByName("btnAbout"));
+
+	// touchEvent
+	btnGame->addTouchEventListener(btnGame, toucheventselector(GoBang::touchEventButtonGame));
+	btnSetting->addTouchEventListener(btnSetting, toucheventselector(GoBang::touchEventButtonSetting));
+	btnAbout->addTouchEventListener(btnAbout, toucheventselector(GoBang::touchEventButtonAbout));
+
+	return node;
+}
+
+cocos2d::Node* GoBang::createSettingScene()
+{
+	std::string sceneFileName = "settingScene.json";
+	int tag = 10018;
+	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
+
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto render = static_cast<ComRender*>(node->getChildByTag(tag)->getComponent("GUIComponent"));
+	auto widget = static_cast<Widget*>(render->getNode());
+
+	return node;
+}
+
+cocos2d::Node* GoBang::createAboutScene()
+{
+	std::string sceneFileName = "aboutScene.json";
+	int tag = 10015;
+	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
+
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto render = static_cast<ComRender*>(node->getChildByTag(tag)->getComponent("GUIComponent"));
+	auto widget = static_cast<Widget*>(render->getNode());
+
+	return node;
+}
+
+cocos2d::Node* GoBang::createGameScene()
+{
+	std::string sceneFileName = "gameScene.json";
+	int tag = 10016;
+	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
+
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto render = static_cast<ComRender*>(node->getChildByTag(tag)->getComponent("GUIComponent"));
+	auto widget = static_cast<Widget*>(render->getNode());
+	auto btnBack = static_cast<Button*>(widget->getChildByName("btnBack"));
+	btnBack->addTouchEventListener(btnBack,toucheventselector(GoBang::touchEventButtonBack));
+
+	return node;
 }
 
 // btnGame touch event
 void GoBang::touchEventButtonGame(Ref *pSender, TouchEventType type)
 {
 	auto scene = Scene::create();
-	auto _nodeGame = SceneReader::getInstance()->createNodeWithSceneFile("gameScene.json");
-	auto renderGame = static_cast<ComRender*>(_nodeGame->getChildByTag(10011)->getComponent("GUIComponent"));
-	auto widgetGame = static_cast<cocos2d::ui::Widget*>(renderGame->getNode());
-	auto btnBack = static_cast<Button*>(widgetGame->getChildByName("Button_3"));
-	btnBack->addTouchEventListener(this, toucheventselector(GoBang::touchEventButtonBack));
-	scene->addChild(_nodeGame);
+	auto node = createGameScene();
+	scene->addChild(node);
 	switch (type)
 	{
 	case TOUCH_EVENT_ENDED:
@@ -92,22 +150,14 @@ void GoBang::touchEventButtonAbout(Ref *pSender, TouchEventType type)
 void GoBang::touchEventButtonBack(Ref *pSender, TouchEventType type)
 {
 	auto scene = Scene::create();
-	auto _nodeSysMenu = SceneReader::getInstance()->createNodeWithSceneFile("sysMenuScene.json");
-	auto render = static_cast<ComRender*>(_nodeSysMenu->getChildByTag(10013)->getComponent("GUIComponent"));
-	auto widget = static_cast<cocos2d::ui::Widget*>(render->getNode());
-	auto btnGame = static_cast<Button*>(widget->getChildByName("btnGame"));
-	btnGame->addTouchEventListener(this, toucheventselector(GoBang::touchEventButtonGame));
-	scene->addChild(_nodeSysMenu);
+	auto node = createSysMenuScene();
+	scene->addChild(node);
 	switch (type)
 	{
 	case TOUCH_EVENT_ENDED:
-		
-		
 		Director::getInstance()->replaceScene(scene);
-
 		break;
 	default:
 		break;
 	}
-		
 }
