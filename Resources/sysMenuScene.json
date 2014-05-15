@@ -16,7 +16,7 @@
       "classname": "CCNode",
       "name": null,
       "canedit": true,
-      "objecttag": 10017,
+      "objecttag": 10003,
       "rotation": 0,
       "scalex": 1,
       "scaley": 1,
@@ -32,7 +32,7 @@
           "name": "GUIComponent",
           "file": null,
           "fileData": {
-            "path": "sysMenuUi/sysMenuUi.ExportJson",
+            "path": "publish/sysMenuUi.ExportJson",
             "plistFile": "",
             "resourceType": 0
           }
@@ -45,7 +45,7 @@
     "_width": 480
   },
   "Triggers": null,
-  "Version": "1.4.0.0",
+  "Version": "1.4.0.1",
   "components": [
     {
       "__type": "ComSceneSurrogate:#EditorCommon.JsonModel.Component",

@@ -43,7 +43,7 @@ bool GoBang::init()
 cocos2d::Node* GoBang::createSysMenuScene()
 {
 	std::string sceneFileName = "sysMenuScene.json";
-	int tag = 10017;
+	int tag = 10003;
 	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
 
 	if (node == nullptr)
@@ -53,12 +53,11 @@ cocos2d::Node* GoBang::createSysMenuScene()
 
 	auto render = static_cast<ComRender*>(node->getChildByTag(tag) -> getComponent("GUIComponent"));
 	auto widget = static_cast<Widget*>(render->getNode());
-
+	
 	// Button
 	auto btnGame = static_cast<Button*>(widget->getChildByName("btnGame"));
 	auto btnSetting = static_cast<Button*>(widget->getChildByName("btnSetting"));
 	auto btnAbout = static_cast<Button*>(widget->getChildByName("btnAbout"));
-
 	// touchEvent
 	btnGame->addTouchEventListener(btnGame, toucheventselector(GoBang::touchEventButtonGame));
 	btnSetting->addTouchEventListener(btnSetting, toucheventselector(GoBang::touchEventButtonSetting));
@@ -70,7 +69,7 @@ cocos2d::Node* GoBang::createSysMenuScene()
 cocos2d::Node* GoBang::createSettingScene()
 {
 	std::string sceneFileName = "settingScene.json";
-	int tag = 10018;
+	int tag = 10004;
 	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
 
 	if (node == nullptr)
@@ -87,7 +86,7 @@ cocos2d::Node* GoBang::createSettingScene()
 cocos2d::Node* GoBang::createAboutScene()
 {
 	std::string sceneFileName = "aboutScene.json";
-	int tag = 10015;
+	int tag = 10005;
 	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
 
 	if (node == nullptr)
@@ -104,7 +103,7 @@ cocos2d::Node* GoBang::createAboutScene()
 cocos2d::Node* GoBang::createGameScene()
 {
 	std::string sceneFileName = "gameScene.json";
-	int tag = 10016;
+	int tag = 10006;
 	auto node = SceneReader::getInstance()->createNodeWithSceneFile(sceneFileName);
 
 	if (node == nullptr)
@@ -114,7 +113,10 @@ cocos2d::Node* GoBang::createGameScene()
 
 	auto render = static_cast<ComRender*>(node->getChildByTag(tag)->getComponent("GUIComponent"));
 	auto widget = static_cast<Widget*>(render->getNode());
+	auto imgBoard = static_cast<ImageView*>(widget->getChildByName("imgBoard"));
 	auto btnBack = static_cast<Button*>(widget->getChildByName("btnBack"));
+	
+	imgBoard->addTouchEventListener(imgBoard, toucheventselector(GoBang::touchEventImageBoard));
 	btnBack->addTouchEventListener(btnBack,toucheventselector(GoBang::touchEventButtonBack));
 
 	return node;
@@ -139,7 +141,6 @@ void GoBang::touchEventButtonGame(Ref *pSender, TouchEventType type)
 // btnSetting touch event
 void GoBang::touchEventButtonSetting(Ref *pSender, TouchEventType type)
 {
-
 }
 
 // btnAbout touch event
@@ -147,6 +148,8 @@ void GoBang::touchEventButtonAbout(Ref *pSender, TouchEventType type)
 {
 
 }
+
+// btnBack touch event
 void GoBang::touchEventButtonBack(Ref *pSender, TouchEventType type)
 {
 	auto scene = Scene::create();
@@ -157,6 +160,20 @@ void GoBang::touchEventButtonBack(Ref *pSender, TouchEventType type)
 	case TOUCH_EVENT_ENDED:
 		Director::getInstance()->replaceScene(scene);
 		break;
+	default:
+		break;
+	}
+}
+
+// imgBoard touch event
+void GoBang::touchEventImageBoard(Ref *pSender, TouchEventType type)
+{
+	auto imgBoard = static_cast<ImageView*>(pSender);
+	auto point = imgBoard->getTouchStartPos();
+	switch (type)
+	{
+	case TOUCH_EVENT_ENDED:
+		CCLog("%f,%f", point.x, point.y);
 	default:
 		break;
 	}
