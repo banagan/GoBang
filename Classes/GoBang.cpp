@@ -170,10 +170,17 @@ void GoBang::touchEventImageBoard(Ref *pSender, TouchEventType type)
 {
 	auto imgBoard = static_cast<ImageView*>(pSender);
 	auto point = imgBoard->getTouchStartPos();
+	auto sprite = Sprite::create("piece.png");
+	int x = (int)(point.x / 30 + 0.5) * 30;
+	int y = (int)(point.y / 30 + 0.5) * 30;
 	switch (type)
 	{
 	case TOUCH_EVENT_ENDED:
-		CCLog("%f,%f", point.x, point.y);
+		CCLog("%f,%f,%d,%d", point.x, point.y,x,y);
+		sprite->setAnchorPoint(Point(0.5,0.5));
+		addChild(sprite);
+		sprite->setPosition(Point(x-30,y-90));
+		
 	default:
 		break;
 	}
