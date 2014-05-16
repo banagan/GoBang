@@ -32,7 +32,6 @@ public:
     // implement the "static create()" method manually
 	CREATE_FUNC(GoBang);
 
-
 };
 
 #endif // __HELLOWORLD_SCENE_H__
